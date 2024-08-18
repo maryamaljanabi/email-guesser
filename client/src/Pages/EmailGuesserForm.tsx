@@ -2,7 +2,8 @@ import { Box, Button, Container, Group, Text, TextInput, Title } from "@mantine/
 import { useForm } from "@mantine/form";
 import styles from "./EmailGuesserForm.module.css";
 import { useState } from "react";
-const apiUrl = "http://localhost:5000";
+import { notifications } from "@mantine/notifications";
+const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
 type FormInput = {
   fullName: string;
@@ -16,6 +17,10 @@ const EmailGuesserForm = () => {
     initialValues: {
       fullName: "",
       domain: "",
+    },
+    validate: {
+      fullName: (value) => (value.length < 3 ? "Name must have at least 3 letters" : null),
+      domain: (value) => (/^[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z]{2,}$/.test(value) ? null : "Invalid domain"),
     },
   });
 
@@ -38,6 +43,11 @@ const EmailGuesserForm = () => {
       setDerivedEmail(data.email);
     } catch (error: any) {
       console.log(error);
+      notifications.show({
+        color: "red",
+        title: "Error",
+        message: error?.message || "An error occurred",
+      });
     }
   };
 
