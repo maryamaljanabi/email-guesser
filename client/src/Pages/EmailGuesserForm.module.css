@@ -1,5 +1,12 @@
 .container {
-  background-image: linear-gradient(to right top, #7eb2ff, #a4bbf7, #bfc6ef, #d2d2e7, #e0e0e0);
+  background-image: linear-gradient(
+    to right top,
+    #7eb2ff,
+    #a4bbf7,
+    #bfc6ef,
+    #d2d2e7,
+    #e0e0e0
+  );
   height: 100vh;
   display: flex;
   flex-direction: column;

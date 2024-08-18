@@ -1,9 +1,17 @@
-import { Box, Button, Container, Group, Text, TextInput, Title } from "@mantine/core";
-import { useForm } from "@mantine/form";
-import styles from "./EmailGuesserForm.module.css";
-import { useState } from "react";
-import { notifications } from "@mantine/notifications";
-const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5000";
+import {
+  Box,
+  Button,
+  Container,
+  Group,
+  Text,
+  TextInput,
+  Title,
+} from '@mantine/core';
+import { useForm } from '@mantine/form';
+import styles from './EmailGuesserForm.module.css';
+import { useState } from 'react';
+import { notifications } from '@mantine/notifications';
+const apiUrl = 'http://localhost:5000';
 
 type FormInput = {
   fullName: string;
@@ -11,25 +19,29 @@ type FormInput = {
 };
 
 const EmailGuesserForm = () => {
-  const [derivedEmail, setDerivedEmail] = useState<string>("");
+  const [derivedEmail, setDerivedEmail] = useState<string>('');
 
   const form = useForm({
     initialValues: {
-      fullName: "",
-      domain: "",
+      fullName: '',
+      domain: '',
     },
     validate: {
-      fullName: (value) => (value.length < 3 ? "Name must have at least 3 letters" : null),
-      domain: (value) => (/^[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z]{2,}$/.test(value) ? null : "Invalid domain"),
+      fullName: (value) =>
+        value.length < 3 ? 'Name must have at least 3 letters' : null,
+      domain: (value) =>
+        /^[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z]{2,}$/.test(value)
+          ? null
+          : 'Invalid domain',
     },
   });
 
   const handleSubmit = async (values: FormInput) => {
     try {
       const response = await fetch(`${apiUrl}/email-guesser`, {
-        method: "POST",
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(values),
       });
@@ -44,16 +56,16 @@ const EmailGuesserForm = () => {
     } catch (error: any) {
       console.log(error);
       notifications.show({
-        color: "red",
-        title: "Error",
-        message: error?.message || "An error occurred",
+        color: 'red',
+        title: 'Error',
+        message: error?.message || 'An error occurred',
       });
     }
   };
 
   const handleClear = () => {
     form.reset();
-    setDerivedEmail("");
+    setDerivedEmail('');
   };
 
   return (
@@ -62,8 +74,20 @@ const EmailGuesserForm = () => {
         <Title order={2} mb="lg">
           Email Guesser
         </Title>
-        <TextInput label="Full Name" placeholder="Enter your full name" key={form.key("fullName")} {...form.getInputProps("fullName")} mb="sm" />
-        <TextInput label="Company Domain" placeholder="Enter your company domain" key={form.key("domain")} {...form.getInputProps("domain")} mb="lg" />
+        <TextInput
+          label="Full Name"
+          placeholder="Enter your full name"
+          key={form.key('fullName')}
+          {...form.getInputProps('fullName')}
+          mb="sm"
+        />
+        <TextInput
+          label="Company Domain"
+          placeholder="Enter your company domain"
+          key={form.key('domain')}
+          {...form.getInputProps('domain')}
+          mb="lg"
+        />
         <Group grow>
           <Button type="submit" color="blue">
             Submit

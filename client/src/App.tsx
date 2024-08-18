@@ -1,4 +1,4 @@
-import EmailGuesserForm from "./Pages/EmailGuesserForm";
+import EmailGuesserForm from './Pages/EmailGuesserForm';
 
 function App() {
   return <EmailGuesserForm />;
