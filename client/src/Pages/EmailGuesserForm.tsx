@@ -11,7 +11,8 @@ import { useForm } from '@mantine/form';
 import styles from './EmailGuesserForm.module.css';
 import { useState } from 'react';
 import { notifications } from '@mantine/notifications';
-const apiUrl = 'http://localhost:5000';
+import { config } from '../constants';
+const { apiUrl } = config;
 
 type FormInput = {
   fullName: string;
