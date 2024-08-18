@@ -1,9 +1,7 @@
-# compiled output
-/dist
-/build
-
-# Ignore node_modules in any directory
+# Ignore in any directory
 **/node_modules
+**/dist
+**/build
 
 # Logs
 logs
