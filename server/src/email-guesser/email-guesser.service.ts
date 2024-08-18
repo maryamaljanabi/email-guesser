@@ -9,13 +9,11 @@ export class EmailGuesserService {
   constructor(private emailDatasetRepository: EmailDatasetRepository) {}
 
   deriveEmail(input: EmailGuessInputDto): EmailGuessResponseDto {
-    const domainEmails = this.emailDatasetRepository.getByDomain(input.domain);
+    const domain = input.domain.toLowerCase();
+    const domainEmails = this.emailDatasetRepository.getByDomain(domain);
     if (!domainEmails?.length)
-      throw new HttpException(
-        `The provided domain ${input.domain} is invalid`,
-        400,
-      );
+      throw new HttpException(`The provided domain ${domain} is invalid`, 400);
     const emailRule = getEmailRule(domainEmails[0]);
-    return { email: getEmail(input.fullName, input.domain, emailRule) };
+    return { email: getEmail(input.fullName, domain, emailRule) };
   }
 }
