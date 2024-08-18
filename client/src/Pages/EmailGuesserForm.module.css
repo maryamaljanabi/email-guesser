@@ -1,0 +1,17 @@
+.container {
+  background-image: linear-gradient(to right top, #7eb2ff, #a4bbf7, #bfc6ef, #d2d2e7, #e0e0e0);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.formBox {
+  background: rgba(255, 255, 255, 0.8);
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 500px;
+}

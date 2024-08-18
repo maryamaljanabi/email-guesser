@@ -1,5 +1,7 @@
+import EmailGuesserForm from "./Pages/EmailGuesserForm";
+
 function App() {
-  return <div>Main page</div>;
+  return <EmailGuesserForm />;
 }
 
 export default App;
