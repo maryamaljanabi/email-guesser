@@ -38,6 +38,8 @@ const EmailGuesserForm = () => {
   });
 
   const handleSubmit = async (values: FormInput) => {
+    setDerivedEmail('');
+
     try {
       const response = await fetch(`${apiUrl}/email-guesser`, {
         method: 'POST',
