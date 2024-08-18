@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { sampleDataset } from '../data/sampleDataset';
+import { DataRecord } from '../types';
 
 @Injectable()
 export class EmailDatasetRepository {
@@ -7,5 +8,14 @@ export class EmailDatasetRepository {
 
   getAll(): Record<string, string> {
     return this.dataset;
+  }
+
+  getByDomain(domain: string): DataRecord[] {
+    return Object.entries(this.dataset).reduce((acc, [name, email]) => {
+      if (email.split('@')[1] === domain) {
+        acc.push({ fullName: name, email: email });
+      }
+      return acc;
+    }, []);
   }
 }
